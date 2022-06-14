@@ -12,22 +12,17 @@ class PedidoController implements IApiUsable
         //Recibimos los parametros
         $parametros = $request->getParsedBody();
 
-        $nombre = $parametros['id'];
-        $apellido = $parametros['apellido'];
-        $tipo = $parametros['tipo'];
-        $telefono = $parametros['telefono'];
-        $Pedido = $parametros['Pedido'];
-        $clave = md5($parametros['clave']);
+        $id_usuario_mozo = $parametros['id_usuario_mozo'];
+        $codigo_mesa = $parametros['codigo_mesa'];
+        $estado_pedido = $parametros['estado_pedido'];
 
         // //Creamos el Pedido
-        // $auxPedido = new Pedido();
-        // $auxPedido->id_usuario_mozo = $auxPedido->GenerarCodigo();
-        // $auxPedido->codigo_mesa = $apellido;
-        // $auxPedido->tipo = $tipo;
-        // $auxPedido->telefono = $telefono;
-        // $auxPedido->Pedido = $Pedido;
-        // $auxPedido->clave = $clave;
-        // $auxPedido->estado = 'Activo';
+        $auxPedido = new Pedido();
+        $auxPedido->codigo_pedido = $auxPedido->GenerarCodigo();
+        $auxPedido->id_usuario_mozo = $id_usuario_mozo;
+        $auxPedido->codigo_mesa = $codigo_mesa;
+        $auxPedido->estado_pedido = $estado_pedido;
+        $auxPedido->estado = 'pendiente';
 
         //Guardamos en la base el Pedido creado
         // $usr->save();

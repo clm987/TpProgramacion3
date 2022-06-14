@@ -42,7 +42,6 @@ class UsuarioController implements IApiUsable
   public function TraerUno($request, $response, $args)
   {
     // Buscamos usuario por nombre
-    var_dump($args);
     $usr = $args['usuario'];
 
     // Buscamos por primary key
@@ -50,7 +49,6 @@ class UsuarioController implements IApiUsable
 
     // Buscamos por attr usuario
     $usuario = Usuario::where('usuario', $usr)->first();
-    var_dump($usuario);
 
     $payload = json_encode($usuario);
 

@@ -35,16 +35,14 @@ class ProductoController implements IApiUsable
 
     public function TraerUno($request, $response, $args)
     {
-        echo "entro a traer uno";
         // Buscamos Producto por nombre
         $auxProducto = $args['nombre_producto'];
-        var_dump($auxProducto);
 
         // Buscamos por primary key
-        // $Producto = Producto::find($usr);
+        //$Producto = Producto::find(2);
 
         // Buscamos por attr Producto
-        $Producto = Producto::where('Producto', $usr)->first();
+        $Producto = Producto::where('nombre', $auxProducto)->first();
 
         $payload = json_encode($Producto);
 

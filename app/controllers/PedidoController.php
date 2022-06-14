@@ -14,19 +14,23 @@ class PedidoController implements IApiUsable
 
         $id_usuario_mozo = $parametros['id_usuario_mozo'];
         $codigo_mesa = $parametros['codigo_mesa'];
-        $estado_pedido = $parametros['estado_pedido'];
-
-        // //Creamos el Pedido
-        $auxPedido = new Pedido();
-        $auxPedido->codigo_pedido = $auxPedido->GenerarCodigo();
-        $auxPedido->id_usuario_mozo = $id_usuario_mozo;
-        $auxPedido->codigo_mesa = $codigo_mesa;
-        $auxPedido->estado_pedido = $estado_pedido;
-        $auxPedido->estado = 'pendiente';
-
-        //Guardamos en la base el Pedido creado
-        // $usr->save();
-
+        $lista_productos =  $parametros['listado_id_productos'];
+        $array_productos = explode(",", $lista_productos);
+        $codigo_pedido = Pedido::GenerarCodigo();
+        // $array_id_productos = [];
+        for ($i = 0; $i < count($array_productos); $i++) {
+            // array_push($array_id_productos, intval($array_productos[$i]));
+            //Creamos el Pedido
+            $auxPedido = new Pedido();
+            $auxPedido->codigo_pedido = $codigo_pedido;
+            $auxPedido->id_usuario_mozo = $id_usuario_mozo;
+            $auxPedido->codigo_mesa = $codigo_mesa;
+            $auxPedido->estado_pedido = 'pendiente';
+            $auxPedido->id_producto = intval($array_productos[$i]);
+            //Guardamos en la base el Pedido creado
+            $auxPedido->save();
+        }
+        // var_dump($array_id_productos);
         $payload = json_encode(array("mensaje" => "Pedido creado con exito"));
 
         $response->getBody()->write($payload);
